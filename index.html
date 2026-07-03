@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castelo de Paiva | Vidros e Ferragens</title>
+    <!-- Fonte Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #131c2e;
+            --accent-primary: #6366f1;
+            --accent-secondary: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero / Header Section */
+        header {
+            position: relative;
+            padding: 80px 24px;
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.1), transparent 40%);
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .badge-top {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #fff 30%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Layout Container */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Seções Gerais */
+        section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::after {
+            content: '';
+            height: 1px;
+            flex-grow: 1;
+            background: linear-gradient(90deg, var(--border-color), transparent);
+        }
+
+        /* 1. TOP SECTOR: SERVIÇOS (CARDS PREMIUM) */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .cnae-tag {
+            font-size: 0.75rem;
+            color: var(--accent-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 2. DASHBOARD DE INFORMAÇÕES */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .dash-card {
+            background: rgba(19, 28, 46, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            font-weight: 500;
+            text-align: right;
+            font-size: 0.95rem;
+        }
+
+        /* Status Badge com Animação Pulse */
+        .status-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* SÓCIOS */
+        .partners-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .partner-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .avatar-placeholder {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* CONTATO E AÇÕES */
+        .cta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .cta-grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 2.2rem; }
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="badge-top">Corporate Profile</span>
+        <h1>Castelo de Paiva</h1>
+        <p>Soluções em Vidros, Ferragens e Engenharia de Instalação Corporativa.</p>
+    </header>
+
+    <div class="wrapper">
+
+        <!-- 1. SERVIÇOS NO TOPO (GRID MODERNO) -->
+        <section>
+            <div class="section-title">Principais Verticais de Serviço</div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="cnae-tag">CNAE 33.29-5-99</span>
+                    <h3>Instalações Ativas</h3>
+                    <p>Engenharia de instalação e montagem de equipamentos e infraestruturas customizadas de alta complexidade.</p>
+                </div>
+                <div class="service-card">
+                    <span class="cnae-tag">CNAE 47.43-1-00</span>
+                    <h3>Vidraçaria Especializada</h3>
+                    <p>Comércio varejista e fornecimento de lâminas, painéis e estruturas de vidro lapidadas sob medida.</p>
+                </div>
+                <div class="service-card">
+                    <span class="cnae-tag">CNAE 47.44-0-01</span>
+                    <h3>Ferragens e Ferramentas</h3>
+                    <p>Distribuição qualificada de insumos metálicos, ferramentas mecânicas e suportes estruturais de alta resistência.</p>
+                </div>
+                <div class="service-card">
+                    <span class="cnae-tag">CNAE 47.59-8-99</span>
+                    <h3>Artigos Domésticos & Variados</h3>
+                    <p>Soluções de utilidade doméstica e comércio varejista integrado de produtos complementares de consumo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. DATAS & REGISTROS (ESTILO DASHBOARD) -->
+        <section>
+            <div class="section-title">Dados Operacionais e Cadastrais</div>
+            <div class="dashboard-grid">
+                
+                <!-- Card 1: Status Jurídico -->
+                <div class="dash-card">
+                    <div class="info-row">
+                        <span class="info-label">Situação Cadastral</span>
+                        <span class="info-value status-container">
+                            <span class="pulse-dot"></span> ATIVA
+                        </span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Atualizado em</span>
+                        <span class="info-value">11/09/2004</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Razão Social</span>
+                        <span class="info-value">Castelo de Paiva Vidros e Ferragens LTDA</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">CNPJ</span>
+                        <span class="info-value">03.282.066/0001-00</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Tributário e Porte -->
+                <div class="dash-card">
+                    <div class="info-row">
+                        <span class="info-label">Tempo de Atividade</span>
+                        <span class="info-value" style="color: var(--accent-secondary);">26 Anos Operacionais</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Regime Tributário</span>
+                        <span class="info-value">Simples Nacional (Desde 2007)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Porte da Empresa</span>
+                        <span class="info-value">Micro Empresa (ME)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label font-bold">Capital Social</span>
+                        <span class="info-value" style="font-weight: 700;">R$ 100.000,00</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Inscrições Estaduais -->
+                <div class="dash-card">
+                    <div class="info-row">
+                        <span class="info-label">Natureza Jurídica</span>
+                        <span class="info-value">Sociedade Empresária LTDA</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">I.E. Rio de Janeiro</span>
+                        <span class="info-value">76.014.08-6</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">I.E. Minas Gerais</span>
+                        <span class="info-value">005371768.00-80</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Unidade</span>
+                        <span class="info-value">Matriz</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. QUADRO SOCIETÁRIO -->
+        <section>
+            <div class="section-title">Quadro de Sócios Administradores</div>
+            <div class="partners-list">
+                <div class="partner-item">
+                    <div class="avatar-placeholder">AP</div>
+                    <div>
+                        <h4 style="font-size: 1rem; font-weight: 600;">Ana Paula Paiva Gomes</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Sócio-Administrador</p>
+                    </div>
+                </div>
+                <div class="partner-item">
+                    <div class="avatar-placeholder">LP</div>
+                    <div>
+                        <h4 style="font-size: 1rem; font-weight: 600;">Luiz Claudio da Silva Paiva</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Sócio-Administrador</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CONTATOS E BOTÕES DE AÇÃO -->
+        <section>
+            <div class="section-title">Canais Oficiais & Localização</div>
+            <div class="cta-grid">
+                
+                <div class="dash-card" style="display: flex; flex-direction: column; justify-content: space-between; gap: 20px;">
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">Sede Administrativa</p>
+                        <p style="font-weight: 500; font-size: 1.1rem;">Av. Marechal Floriano, 91 — Centro</p>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Rio de Janeiro - RJ | CEP: 20080-004</p>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Avenida+Marechal+Floriano+91+Centro+Rio+de+Janeiro" target="_blank" class="btn btn-secondary">
+                        Abrir Localização no Maps
+                    </a>
+                </div>
+
+                <div class="dash-card" style="display: flex; flex-direction: column; justify-content: space-between; gap: 20px;">
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">Atendimento Comercial</p>
+                        <p style="font-weight: 600; font-size: 1.3rem; color: var(--accent-secondary);">(21) 2203-0373</p>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">orgmarinhos@hotmail.com</p>
+                    </div>
+                    <a href="mailto:orgmarinhos@hotmail.com" class="btn btn-primary">
+                        Iniciar Contato via E-mail
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 1999 - 2026 Castelo de Paiva Vidros e Ferragens LTDA. Dados extraídos de registros públicos consolidados.</p>
+    </footer>
+
+</body>
+</html>
